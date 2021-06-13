@@ -9,10 +9,8 @@ const GuideSchema = new mongoose.Schema({
     },
     citizenship_number:{
         type: String,
-        required: true,
-        unique: true
-    },
-
+        required: true
+    }
 })
 
 module.exports = mongoose.model("GuideProfile", GuideSchema);

@@ -140,22 +140,24 @@ exports.getAuthenticatedUser = async(req, res) =>{
 }
 
 exports.updateGuideProfile = async(req,res) =>{
+
     try{
 
         const gProfile = new GuideProfile();
         gProfile.city = req.body.city;
         gProfile.citizenship_number = req.body.citizenship_number;
 
+
         gProfile.save().then( async() =>{
 
             const findUser = await User.findById(req.user.id);
 
-
-
             findUser.gProfile = gProfile._id;
             findUser.details = true;
             await findUser.save();
-        })
+
+        }
+        )
 
         res.status(201).json(success("Successfully Updated Profile", res.statusCode, gProfile))
 
