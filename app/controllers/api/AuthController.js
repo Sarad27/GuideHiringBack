@@ -7,7 +7,6 @@ const User = require("../../models/User");
 const GuideProfile = require('../../models/GuideProfile')
 const TouristProfile = require('../../models/TouristProfile')
 
-
 exports.signUp = async (req, res) => {
     // Validation
     const errors = validationResult(req);
@@ -92,6 +91,17 @@ exports.login = async (req, res) =>{
         if (!checkPassword)
             return res.status(422).json(validation("Invalid credentials"));
 
+        //location GEO
+
+        const location = req.body.location;
+
+        user.geometry = location;
+
+
+        //set user online
+        user.status = true;
+        await user.save();
+
         // If the requirement above pass
         // Lets send the response with JWT token in it
         const payload = {
@@ -105,7 +115,7 @@ exports.login = async (req, res) =>{
         jwt.sign(
             payload,
             process.env.JWT_SECRET,
-            { expiresIn: 3600 },
+            { expiresIn: 36000 },
             (err, token) => {
                 if (err) throw err;
 
@@ -116,6 +126,22 @@ exports.login = async (req, res) =>{
         );
     } catch (err) {
         console.log(err.message);
+        res.status(500).json(error("Server error", res.statusCode));
+    }
+}
+
+
+exports.logout = async(req,res) =>{
+
+    try{
+
+        const user = await User.findByIdAndUpdate(req.user.id, {status: false})
+
+        res
+        .status(200)
+        .json(success("Logout", res.statusCode));
+
+    }catch(e){
         res.status(500).json(error("Server error", res.statusCode));
     }
 }

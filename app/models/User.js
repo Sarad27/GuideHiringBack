@@ -34,6 +34,19 @@ const UserSchema = new mongoose.Schema({
     tProfile:{
         type: mongoose.Schema.Types.ObjectId,
         ref :'TouristProfile'
+    },
+    status:{
+        type: Boolean,
+        required: false
+    },
+    geometry : {
+        type: {
+            type: String, 
+            enum: ['Point']
+        },
+        coordinates: {
+            type: [Number]
+          }
     }
 })
 

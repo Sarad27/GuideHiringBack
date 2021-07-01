@@ -6,8 +6,6 @@ exports.getUser = async(req,res) =>{
     try{
         const user = await User.findById(req.params.id).select("-password").populate('gProfile').populate('tProfile');
 
-        console.log(user)
-
         res.status(201).json(success("Successfully Fetched User Data", user))
 
     }catch(e){
