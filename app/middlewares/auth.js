@@ -3,13 +3,15 @@ const { error } = require("../helpers/responseApi")
 const jwt = require("jsonwebtoken");
 
 exports.auth = async (req, res, next) => {
+
     const authorizationHeader = req.header("Authorization");
 
-    if(!authorizationHeader)
-        return res
-            .status(400)
-            .json(error("No Authorization Token", res.statusCode));
+    if(!authorizationHeader){
+        console.log("No Auth")
+        return res.status(400).json(error("No Authorization Token", res.statusCode));
 
+    }
+        
 
     // Split the authorization header value
     const splitAuthorizationHeader = authorizationHeader.split(" ");

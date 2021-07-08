@@ -5,9 +5,23 @@ const connectToMongoDb = require('./config/db')
 const ApiRoutes = require('./routes/index')
 const path = require('path')
 
+const http = require('http');
+const server = http.createServer(app);
+
+const { Server } = require("socket.io");
+const establishSocketConnection = require('./socket/socket');
+
 app.use(cors());
 
+const io = new Server(server, {
+    cors: {
+      origin: '*',
+    }
+  });
+
 connectToMongoDb();
+
+establishSocketConnection(io);
 
 
 const directory = path.join(__dirname, '/uploads');
@@ -20,6 +34,6 @@ app.get('/', (req,res) =>{
     res.status(200).json({message: "HELLO FROM NODE"})
 })
 
-app.listen(5000, ()=>{
+server.listen(5000, ()=>{
     console.log("Server running on port 5000")
 })

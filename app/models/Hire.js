@@ -4,20 +4,25 @@ const HireSchema = new mongoose.Schema({
 
     guide:{
         type: mongoose.Schema.Types.ObjectId,
-        ref :'GuideProfile'
+        ref :'User'
     },
     tourist:{
         type: mongoose.Schema.Types.ObjectId,
-        ref :'TouristProfile'
+        ref :'User'
     },
     destination:{
         type: mongoose.Schema.Types.ObjectId,
         ref :'Destination'
     },
-    date:{
-        type: Date,
-        value: Date.now
+    status:{
+        type: String,
+        // required: true
     }
-})
+},
+  {
+    timestamps: true,
+  }
+
+)
 
 module.exports = mongoose.model("Hire", HireSchema);
