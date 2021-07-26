@@ -35,7 +35,13 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref :'TouristProfile'
     },
+    // status == online ofline status
     status:{
+        type: Boolean,
+        required: false
+    },
+    //avaiilability == occupied free
+    availability:{
         type: Boolean,
         required: false
     },
@@ -51,3 +57,4 @@ const UserSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model("User", UserSchema);
+

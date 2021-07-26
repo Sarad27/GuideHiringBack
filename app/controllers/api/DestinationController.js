@@ -30,6 +30,7 @@ exports.postDestination = async (req,res) =>{
 }
 
 exports.getDestination = async (req,res) =>{
+
     try{
         const getDestination = await Destination.find();
 
