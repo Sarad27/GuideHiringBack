@@ -10,6 +10,14 @@ const GuideSchema = new mongoose.Schema({
     citizenship_number:{
         type: String,
         required: true
+    },
+    rating :{
+        type: Number,
+        required: false
+    },
+    rateCount:{
+        type: Number,
+        default: 0
     }
 })
 

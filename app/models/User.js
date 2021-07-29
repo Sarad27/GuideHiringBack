@@ -10,14 +10,14 @@ const UserSchema = new mongoose.Schema({
     email:{
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 10,
         maxlength: 255,
         unique: true
     },
     password: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 6,
         maxlength: 1024
     },
     role :{
@@ -43,7 +43,7 @@ const UserSchema = new mongoose.Schema({
     //avaiilability == occupied free
     availability:{
         type: Boolean,
-        required: false
+        default: true
     },
     geometry : {
         type: {

@@ -17,6 +17,10 @@ const HireSchema = new mongoose.Schema({
     status:{
         type: String,
         // required: true
+    },
+    rating:{
+        type: Number,
+        default: null
     }
 },
   {
